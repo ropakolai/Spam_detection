@@ -19,14 +19,14 @@ from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 
 # Load vectorizers and models
-vectorizer_lgrg = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/tfidf_vectorizer_lgrg.pkl')
-model_lgrg = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/lgrg_model.pkl')
+vectorizer_lgrg = joblib.load('models/tfidf_vectorizer_lgrg.pkl')
+model_lgrg = joblib.load('models/lgrg_model.pkl')
 
-vectorizer_mnnb = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/tfidf_vectorizer_mnnb.pkl')
-model_mnnb = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/mnnb_model.pkl')
+vectorizer_mnnb = joblib.load('models/tfidf_vectorizer_mnnb.pkl')
+model_mnnb = joblib.load('models/mnnb_model.pkl')
 
-vectorizer_svc = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/svc_model.pkl')
-model_svc = joblib.load('https://github.com/ropakolai/Spam_detection/blob/78fac0fe185e30146d7c99244104d75302e42610/models/tfidf_vectorizer_svc.pkl')
+vectorizer_svc = joblib.load('models/svc_model.pkl')
+model_svc = joblib.load('models/tfidf_vectorizer_svc.pkl')
 
 # Initialize the stemmer
 stemmer = PorterStemmer()
@@ -61,8 +61,8 @@ st.write("This Streamlit project provides a user interface for spam detection us
          "The application utilizes natural language processing (NLP) techniques such as tokenization and stemming, "
          "alongside pre-trained models like Logistic Regression, Support Vector Machine, and Multinomial Naive Bayes.")
 col1, col2 = st.columns(2)
-col1.image('https://github.com/ropakolai/Spam_detection/blob/88350a6411d9d169704698302eeaf5fc8c3367c8/src/not_spam.png', use_column_width=True)
-col2.image('https://github.com/ropakolai/Spam_detection/blob/5c89a2cb40546a2eebfcc96ca645fd4e491dca43/src/spam.png', use_column_width=True)
+col1.image('src/not_spam.png', use_column_width=True)
+col2.image('src/spam.png', use_column_width=True)
 
 
 # User input
