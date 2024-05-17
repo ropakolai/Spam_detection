@@ -89,7 +89,7 @@ if st.button('Classify'):
         st.write("Prediction:")
         for vectorizer, model, model_name in zip(vectorizers, models, model_names):
             text_stemmed = stem_text(user_input)
-            text_vectorized = vectorizer.transform([text_stemmed])
+            text_vectorized = vectorizer.transform(text_stemmed)
             prediction = model.predict(text_vectorized)[0]
             st.write(f"{model_name}: Prediction: {prediction}")
     else:
