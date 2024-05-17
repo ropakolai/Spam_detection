@@ -7,8 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1ZaPD3g-zTwW-Grczb7cciMyvlor0O23J
 """
 
-!pip install joblib
-!pip install nltk
+
 
 import streamlit as st
 import joblib
