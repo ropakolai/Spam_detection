@@ -15,36 +15,36 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
 
-# Download necessary NLTK resources
+# Téléchargement des ressources NLTK nécessaires
 nltk.download('punkt')
 
-# Load vectorizers and models
+# Chargement des vectoriseurs et des modèles
 vectorizer_lgrg = joblib.load('models/tfidf_vectorizer_lgrg.pkl')
 model_lgrg = joblib.load('models/lgrg_model.pkl')
 
 vectorizer_mnnb = joblib.load('models/tfidf_vectorizer_mnnb.pkl')
 model_mnnb = joblib.load('models/mnnb_model.pkl')
 
-vectorizer_svc = joblib.load('models/svc_model.pkl')
-model_svc = joblib.load('models/tfidf_vectorizer_svc.pkl')
+vectorizer_svc = joblib.load('models/tfidf_vectorizer_svc.pkl')
+model_svc = joblib.load('models/svc_model.pkl')
 
-# Initialize the stemmer
+# Initialisation du stemmer
 stemmer = PorterStemmer()
 
-# Define the list of vectorizers
+# Définition de la liste des vectoriseurs
 vectorizers = [vectorizer_lgrg, vectorizer_svc, vectorizer_mnnb]
 
-# List of models and associated vectorizers
+# Liste des modèles et des vectoriseurs associés
 model_names = ['Logistic Regression', 'SVC', 'Multinomial Naive Bayes']
 models = [model_lgrg, model_svc, model_mnnb]
 
-# Stemming function
+# Fonction de stemming
 def stem_text(text):
     tokens = word_tokenize(text)
     stemmed_tokens = [stemmer.stem(token) for token in tokens]
     return ' '.join(stemmed_tokens)
 
-# Prediction function
+# Fonction de prédiction
 def predict(text):
     text_stemmed = stem_text(text)
     predictions = []
@@ -54,26 +54,25 @@ def predict(text):
         predictions.append(prediction)
     return predictions
 
-# Streamlit user interface
+# Interface utilisateur Streamlit
 st.title('Spam Detection')
-st.write("This Streamlit project provides a user interface for spam detection using machine learning models. "
-         "It allows users to input text for classification as spam or non-spam. "
-         "The application utilizes natural language processing (NLP) techniques such as tokenization and stemming, "
-         "alongside pre-trained models like Logistic Regression, Support Vector Machine, and Multinomial Naive Bayes.")
+st.write("Ce projet Streamlit fournit une interface utilisateur pour la détection de spam à l'aide de modèles d'apprentissage automatique. "
+         "Il permet aux utilisateurs de saisir du texte à classer comme spam ou non-spam. "
+         "L'application utilise des techniques de traitement du langage naturel (NLP) telles que la tokenization et le stemming, "
+         "aux côtés de modèles pré-entraînés comme la régression logistique, la machine à vecteurs de support (SVC) et le modèle bayésien naïf multinomial.")
+
 col1, col2 = st.columns(2)
 col1.image('src/not_spam.png', use_column_width=True)
 col2.image('src/spam.png', use_column_width=True)
 
+# Saisie de l'utilisateur
+user_input = st.text_area('Entrez le texte à classer comme spam ou non-spam')
 
-# User input
-user_input = st.text_area('Enter the text to classify as spam or non-spam')
+st.write("Voici quelques exemples si vous manquez d'imagination :)")
 
-st.write("A few examples if you lack of imagination :)")
-
-# Table of examples
-
+# Tableau des exemples
 table_data = {
-    'Examples': [
+    'Exemples': [
         "Santa Calling! Would your little ones like a call from Santa Xmas eve? Call 09058094583 to book your time.",
         "For the most sparkling shopping breaks from 45 per person; call 0121 2025050 or visit www.shortbreaks.org.uk",
         "... Are you in the pub?",
@@ -82,15 +81,14 @@ table_data = {
 }
 st.table(table_data)
 
-# Button to perform prediction
-if st.button('Classify'):
+# Bouton pour effectuer la prédiction
+if st.button('Classer'):
     if user_input:
-        # Prediction
-        st.write("Prediction:")
-        for vectorizer, model, model_name in zip(vectorizers, models, model_names):
-            text_stemmed = stem_text(user_input)
-            text_vectorized = vectorizer.transform([text_stemmed])
-            prediction = model.predict(text_vectorized)[0]
-            st.write(f"{model_name}: Prediction: {prediction}")
+        # Prédiction
+        st.write("Prédiction:")
+        predictions = predict(user_input)
+        for model_name, prediction in zip(model_names, predictions):
+            st.write(f"{model_name}: Prédiction: {prediction}")
     else:
-        st.warning('Please enter text to classify.')
+        st.warning('Veuillez saisir du texte à classer.')
+
