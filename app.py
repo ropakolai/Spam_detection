@@ -62,7 +62,7 @@ st.write("This Streamlit project provides a user interface for spam detection us
          "alongside pre-trained models like Logistic Regression, Support Vector Machine, and Multinomial Naive Bayes.")
 col1, col2 = st.columns(2)
 col1.image('https://github.com/ropakolai/Spam_detection/blob/88350a6411d9d169704698302eeaf5fc8c3367c8/src/not_spam.png', use_column_width=True)
-col2.image('spam.png', use_column_width=True)
+col2.image('https://github.com/ropakolai/Spam_detection/blob/5c89a2cb40546a2eebfcc96ca645fd4e491dca43/src/spam.png', use_column_width=True)
 
 
 # User input
