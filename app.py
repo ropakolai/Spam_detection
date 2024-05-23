@@ -92,3 +92,29 @@ if st.button('Classer'):
     else:
         st.warning('Veuillez saisir du texte à classer.')
 
+# Custom CSS for positioning text
+custom_css = """
+<style>
+.bottom-right {
+    position: fixed;
+    bottom: 10px;
+    right: 80px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+</style>
+"""
+
+# Custom HTML for the text
+custom_html = """
+<div class="bottom-right">
+    © 2024 Nikolai ROPA
+</div>
+"""
+
+# Injecting CSS and HTML into the Streamlit app
+st.markdown(custom_css, unsafe_allow_html=True)
+st.markdown(custom_html, unsafe_allow_html=True)
+
